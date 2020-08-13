@@ -27,9 +27,11 @@ const storage = multer.diskStorage({
         fs.createReadStream('./public/name.zip')
             .pipe(unzip.Parse())
             .on('entry', function (entry) {
+                console.log(entry);
                 entry.pipe(fs.createWriteStream('./public/name.txt'));
+                entry.pipe(fs.createWriteStream('./public/txt.txt'));
                 let rl = readline.createInterface({
-                    input: fs.createReadStream('./public/name.txt')
+                    input: fs.createReadStream('./public/name.txt'),
                 });
 
                 let line_no = 0;
